@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片网站 - 在线图库</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 页眉 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>📸 图片库</h1>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active" data-category="all">全部</a></li>
+                    <li><a href="#" class="nav-link" data-category="nature">风景</a></li>
+                    <li><a href="#" class="nav-link" data-category="architecture">建筑</a></li>
+                    <li><a href="#" class="nav-link" data-category="people">人物</a></li>
+                    <li><a href="#" class="nav-link" data-category="food">美食</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 搜索栏 -->
+    <section class="search-section">
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="搜索图片（标题、描述、标签）..."
+                autocomplete="off"
+            >
+            <button id="clearBtn" class="clear-btn" style="display: none;">✕</button>
+        </div>
+    </section>
+
+    <!-- 标签过滤 -->
+    <section class="tags-section">
+        <div class="tags-container">
+            <span class="tag-title">标签：</span>
+            <div id="tagsFilter" class="tags-filter">
+                <button class="tag-btn active" data-tag="all">全部</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计信息 -->
+    <section class="stats-section">
+        <p>共找到 <span id="imageCount">0</span> 张图片</p>
+    </section>
+
+    <!-- 图片网格 -->
+    <main class="gallery-container">
+        <div id="imageGrid" class="image-grid">
+            <!-- 图片卡片将在这里动态插入 -->
+        </div>
+    </main>
+
+    <!-- 加载更多 -->
+    <section class="load-more-section">
+        <button id="loadMoreBtn" class="load-more-btn" style="display: none;">加载更多</button>
+    </section>
+
+    <!-- 图片详情模态框 -->
+    <div id="imageModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="">
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription"></p>
+                    <div id="modalTags" class="modal-tags"></div>
+                    <p class="modal-category"><strong>分类：</strong><span id="modalCategory"></span></p>
+                    <div class="modal-actions">
+                        <a id="downloadBtn" href="" download class="btn btn-primary">下载图片</a>
+                        <button id="copyLinkBtn" class="btn btn-secondary">复制链接</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示信息 -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
