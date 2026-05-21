@@ -20,6 +20,7 @@
                     <li><a href="#" class="nav-link" data-category="architecture">建筑</a></li>
                     <li><a href="#" class="nav-link" data-category="people">人物</a></li>
                     <li><a href="#" class="nav-link" data-category="food">美食</a></li>
+                    <li><a href="#" class="nav-link" id="adminLink" style="color: #ffeb3b;">⚙️ 管理</a></li>
                 </ul>
             </nav>
         </div>
@@ -86,10 +87,99 @@
         </div>
     </div>
 
+    <!-- 管理员面板模态框 -->
+    <div id="adminModal" class="modal" style="display: none;">
+        <div class="admin-content">
+            <button class="modal-close">&times;</button>
+            <div class="admin-body">
+                <h2>📊 图片管理中心</h2>
+                
+                <!-- 标签页 -->
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="bulk-add">批量添加</button>
+                    <button class="admin-tab" data-tab="csv-import">CSV 导入</button>
+                    <button class="admin-tab" data-tab="json-import">JSON 导入</button>
+                    <button class="admin-tab" data-tab="statistics">统计信息</button>
+                </div>
+
+                <!-- 批量添加面板 -->
+                <div class="admin-panel active" id="bulk-add">
+                    <h3>🖼️ 批量添加图片</h3>
+                    <div class="admin-form">
+                        <div class="form-group">
+                            <label>图片数量：</label>
+                            <input type="number" id="bulkCount" min="1" max="100" value="10" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>图床 URL：</label>
+                            <input type="text" id="bulkBaseUrl" placeholder="https://picsum.photos/400/300" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>分类：</label>
+                            <select id="bulkCategory" class="form-input">
+                                <option value="nature">🌄 风景</option>
+                                <option value="architecture">🏢 建筑</option>
+                                <option value="people">👥 人物</option>
+                                <option value="food">🍕 美食</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>标签（用逗号分隔）：</label>
+                            <input type="text" id="bulkTags" placeholder="风景,日落,山脉" class="form-input">
+                        </div>
+                        <button id="generateBtn" class="admin-btn">生成并添加</button>
+                    </div>
+                    <div id="bulkResult" class="admin-result"></div>
+                </div>
+
+                <!-- CSV 导入面板 -->
+                <div class="admin-panel" id="csv-import">
+                    <h3>📋 CSV 导入</h3>
+                    <p class="admin-tip">CSV 格式：id,title,description,url,category,tags（标签用|分隔）</p>
+                    <textarea id="csvInput" class="admin-textarea" placeholder="21,海滩日出,美丽的海滩日出,https://example.com/beach.jpg,nature,风景|日出|海滩"></textarea>
+                    <button id="importCsvBtn" class="admin-btn">导入 CSV</button>
+                    <div id="csvResult" class="admin-result"></div>
+                </div>
+
+                <!-- JSON 导入面板 -->
+                <div class="admin-panel" id="json-import">
+                    <h3>📄 JSON 导入</h3>
+                    <p class="admin-tip">粘贴 JSON 数组，格式参考下面的示例</p>
+                    <textarea id="jsonInput" class="admin-textarea" placeholder='[{"id":21,"title":"海滩日出","description":"美丽的日出","url":"https://example.com/beach.jpg","category":"nature","tags":["风景","日出"]}]'></textarea>
+                    <button id="importJsonBtn" class="admin-btn">导入 JSON</button>
+                    <div id="jsonResult" class="admin-result"></div>
+                </div>
+
+                <!-- 统计信息面板 -->
+                <div class="admin-panel" id="statistics">
+                    <h3>📊 统计信息</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div class="stat-label">总图片数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="categoryCount">0</div>
+                            <div class="stat-label">分类数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="tagCount">0</div>
+                            <div class="stat-label">标签数</div>
+                        </div>
+                    </div>
+                    <div id="statsDetail" class="admin-stats"></div>
+                    <button id="exportJsonBtn" class="admin-btn">📥 导出 JSON</button>
+                    <button id="exportCsvBtn" class="admin-btn">📥 导出 CSV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 提示信息 -->
     <div id="toast" class="toast" style="display: none;"></div>
 
     <script src="data.js"></script>
+    <script src="admin.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
